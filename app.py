@@ -14,6 +14,7 @@ from IPython.core.display import display, HTML
 from pyvis.network import Network
 import streamlit.components.v1 as components
 import matplotlib
+import pydot
 
 
 st.title("Demo algoritmo")
@@ -58,7 +59,7 @@ G0 = nx.Graph()
 G0.add_edges_from([(7, 1), (8, 1), (7, 8), (1, 2), (2, 3), (2, 4), (2, 5), (4, 5), (3, 6), (4, 6), (5, 6)])
 nx.draw(G0)
 dot = nx.nx_pydot.to_pydot(G0)
-#st.graphviz_chart(dot.to_string())
+st.graphviz_chart(dot.to_string())
 
 
 col1, col2 = st.beta_columns(2)
