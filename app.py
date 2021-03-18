@@ -16,12 +16,10 @@ import streamlit.components.v1 as components
 
 
 st.title("Demo algoritmo")
-st.header("APPROCCIO GERARCHICO")
-
-
+st.header("Approccio gerarchico")
 st.write("Contributo algoritmico per semplificare il grafo trovando strutture ripetitive-ricorsive al suo interno.")
 
-st.markdown("> aaa\n\n—f3")
+
 
 st.write("Procedura:")
 code = '''
@@ -33,6 +31,18 @@ code = '''
     Riapplicare il procedimento al grafo risultante in un nuovo livello
 '''
 st.code(code, language='python')
+
+df = pd.DataFrame({
+  'first column': ["Singola compressione", "Multicompressione standard", "Multicompressione frattale"],
+  'second column': [10, 20, 30]
+})
+
+
+option = st.selectbox(
+    'Selezionare tipo di compressione',
+     df['first column'])
+
+'You selected: ', option
 
 
 g=net.Network(height='400px', width='50%',heading='')
@@ -51,25 +61,13 @@ dot = nx.nx_pydot.to_pydot(G0)
 
 
 col1, col2 = st.beta_columns(2)
+
 with col1:
-    
-    
     HtmlFile = open("example.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read() 
     components.html(source_code, height = 400,width=400)
 with col2:
     st.graphviz_chart(dot.to_string())
-
-
-
-
-
-
-chart_data = pd.DataFrame(
-     np.random.randn(20, 3),
-     columns=['a', 'b', 'c'])
-
-st.line_chart(chart_data)
 
 
 
@@ -82,6 +80,11 @@ st.line_chart(chart_data)
 #g.show('example.html')
 #display(HTML('example.html'))
 
+chart_data = pd.DataFrame(
+     np.random.randn(20, 3),
+     columns=['a', 'b', 'c'])
+
+st.line_chart(chart_data)
 
 st.write("Here's our first attempt at using data to create a table:")
 st.write(pd.DataFrame({
@@ -104,18 +107,7 @@ if st.checkbox('Show dataframe'):
 
     st.line_chart(chart_data)
     
-df = pd.DataFrame({
-  'first column': [1, 2, 3, 4],
-  'second column': [10, 20, 30, 40]
-})
 
-df
-
-option = st.selectbox(
-    'Which number do you like best?',
-     df['first column'])
-
-'You selected: ', option
 
 @st.cache
 def get_data():
