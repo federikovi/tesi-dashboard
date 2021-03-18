@@ -13,6 +13,7 @@ from pyvis import network as net
 from IPython.core.display import display, HTML
 from pyvis.network import Network
 import streamlit.components.v1 as components
+import matplotlib
 
 
 st.title("Demo algoritmo")
