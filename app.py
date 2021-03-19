@@ -10,29 +10,32 @@ import pandas as pd
 import numpy as np
 import networkx as nx
 from pyvis import network as net
-from IPython.core.display import display, HTML
-from pyvis.network import Network
+#from IPython.core.display import display, HTML
+#from pyvis.network import Network
 import streamlit.components.v1 as components
-import matplotlib
-import pydot
+#import matplotlib
+#import pydot
+import altair as alt
 
 
-st.title("Demo algoritmo")
-st.header("Approccio gerarchico")
+st.header("Dashboard")
+st.subheader("Descrizione algoritmo:")
 st.write("Contributo algoritmico per semplificare il grafo trovando strutture ripetitive-ricorsive al suo interno.")
 
 
+st.subheader("Grafo:")
 
-st.write("Procedura:")
-code = '''
-    Rinominare nodi del grafo G con il livello corrispondente. Tupla: (livello, nodo) 
-    Identificare sottografo motif nel grafo G (motif definiti nel file pattern.ipynb)
-    Collassare il motif in un solo nodo
-    Memorizzare quali nodi si comprimono nel nuovo nodo
-    (Aggiornare il peso e il colore degli archi)
-    Riapplicare il procedimento al grafo risultante in un nuovo livello
-'''
-st.code(code, language='python')
+g=net.Network(height='400px', width='50%',heading='')
+g.add_nodes([1,2,3,4,5,6,7,8])
+g.add_edges([(7, 1), (8, 1), (7, 8), (1, 2), (2, 3), (2, 4), (2, 5), (4, 5), (3, 6), (4, 6), (5, 6)])
+#g.show('example.html')
+#display(HTML('example.html'))
+HtmlFile = open("example.html", 'r', encoding='utf-8')
+source_code = HtmlFile.read() 
+components.html(source_code, height = 400,width=1400)
+
+
+st.subheader("Selezionare il metodo di compressione:")
 
 df = pd.DataFrame({
   'first column': ["Singola compressione", "Multicompressione standard", "Multicompressione frattale"],
@@ -46,14 +49,18 @@ option = st.selectbox(
 
 'You selected: ', option
 
-
-g=net.Network(height='400px', width='50%',heading='')
-g.add_nodes([1,2,3,4,5,6,7,8])
-g.add_edges([(7, 1), (8, 1), (7, 8), (1, 2), (2, 3), (2, 4), (2, 5), (4, 5), (3, 6), (4, 6), (5, 6)])
-#g.show('example.html')
-#display(HTML('example.html'))
+st.subheader("Selezionare il motif:")
 
 
+
+df = pd.DataFrame(
+     np.random.randn(200, 3),
+     columns=['a', 'b', 'c'])
+
+c = alt.Chart(df).mark_circle().encode(
+    x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c'])
+
+st.write(c)
 
 G0 = nx.Graph()
 G0.add_edges_from([(7, 1), (8, 1), (7, 8), (1, 2), (2, 3), (2, 4), (2, 5), (4, 5), (3, 6), (4, 6), (5, 6)])
