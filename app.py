@@ -18,8 +18,8 @@ import streamlit.components.v1 as components
 import altair as alt
 
 
-st.header("Dashboard")
-st.subheader("Descrizione algoritmo:")
+st.header("Daucus Fractal Network Analyzer")
+st.subheader("Federica Trevisan")
 st.write("Contributo algoritmico per semplificare il grafo trovando strutture ripetitive-ricorsive al suo interno.")
 
 
@@ -35,7 +35,7 @@ source_code = HtmlFile.read()
 components.html(source_code, height = 400,width=1400)
 
 
-st.subheader("Selezionare il metodo di compressione:")
+st.subheader("Choose a compression method:")
 
 df = pd.DataFrame({
   'first column': ["Singola compressione", "Multicompressione standard", "Multicompressione frattale"],
@@ -49,7 +49,7 @@ option = st.selectbox(
 
 'You selected: ', option
 
-st.subheader("Selezionare il motif:")
+st.subheader("Choose motif:")
 
 df = pd.DataFrame({
   'first column': ["Triangolo", "Quadrato"],
@@ -64,10 +64,16 @@ option = st.selectbox(
 'You selected: ', option
 
 st.subheader("Animazione verticale")
+st.write("esploso assonometrico. un plot per livello. colori che s'inscuriscono più vengono compressi (effetto sfumato)")
 
+st.subheader("Animazione sul piano orizzontale")
+st.write("si evidenziano i motif")
 
-
-
+st.subheader("Risultati")
+st.write("Grafo iniziale")
+st.write("Grafo finale")
+st.write("metriche, indici, statistiche varie in un unico vettore")
+st.write("plot n. nodi per livello")
 
 #G0 = nx.Graph()
 #G0.add_edges_from([(7, 1), (8, 1), (7, 8), (1, 2), (2, 3), (2, 4), (2, 5), (4, 5), (3, 6), (4, 6), (5, 6)])
